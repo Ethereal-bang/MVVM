@@ -1,0 +1,11 @@
+{
+  "name": "mvvm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Ethereal-bang/MVVM.git",
+  "author": "Ethereal-bang <939847757@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^4.2.0"
+  }
+}
