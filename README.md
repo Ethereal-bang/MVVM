@@ -5,4 +5,5 @@
 4. 实现双向绑定
 
 # (一) Observer
-实现一个数据监听器 Observer 对数据对象的所有属性监听变化通知订阅者
+> 实现一个数据监听器 Observer 对数据对象的所有属性监听变化通知订阅者
+1. 使 Object 数据变得可响应 —— 监听 getter/setter `defineReactive`
