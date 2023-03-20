@@ -6,4 +6,7 @@
 
 # (一) Observer
 > 实现一个数据监听器 Observer 对数据对象的所有属性监听变化通知订阅者
-1. 使 Object 数据变得可响应 —— 监听 getter/setter `defineReactive`
+1. 响应式数据(使数据变得可预测) —— 监听 getter/setter `defineReactive`
+2. 通知订阅者
+   1. 依赖收集 —— Getter
+   2. 通知订阅者 —— Setter

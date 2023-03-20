@@ -1,9 +1,13 @@
+import Dep from "./dep";
+
 /**
  * Is attached to each observed object.
  * */
 class Observer {
+    dep: Dep;
 
     constructor(value: any,) {
+        this.dep = new Dep();
         // 遍历所有键，定义为响应式数据
         Object.keys(value).forEach(key => {
             defineReactive(value, key, value[key]);
@@ -16,6 +20,7 @@ const observe = (
 ): Observer => {
     if (!value || typeof value !== 'object') return;
     return new Observer(value);
+
 }
 
 /**
@@ -26,30 +31,18 @@ const defineReactive = (
     key: string,
     val?: any,
 ) => {
+    const dep = new Dep();
     observe(val);   // 监听子属性
     Object.defineProperty(data, key, {
         enumerable: true,   // 枚举属性 默认false
-        get: () => val,
+        get: () => {
+            dep.depend();   // 收集依赖
+            return val;
+        },
         set: (newVal) => {
             console.log("listen change:", val, newVal)
             val = newVal;
+            dep.notify(); // 通知所有订阅者
         },
     })
 }
-
-/**
- * Test
- * */
-const obj = {
-    foo: 1,
-    bar: {
-        foo: -1,
-    }
-}
-observe(obj)
-const app = document.querySelector("#app");
-setInterval(() => {
-    ++obj.foo;
-    --obj.bar.foo;
-    app.innerHTML = `${obj.foo} ${obj.bar.foo}`
-}, 1000)
