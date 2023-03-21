@@ -36,7 +36,9 @@ const defineReactive = (
     Object.defineProperty(data, key, {
         enumerable: true,   // 枚举属性 默认false
         get: () => {
-            dep.depend();   // 收集依赖
+            if (Dep.target) {
+                dep.depend();   // 收集依赖
+            }
             return val;
         },
         set: (newVal) => {
